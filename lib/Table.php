@@ -266,6 +266,8 @@ class Table {
     foreach ($columns as $column) {
       $this->pushToResultIfIsLikelyForeignKey($column);
     }
+
+    return $this->foreignKeys;
   }
 
   /**
