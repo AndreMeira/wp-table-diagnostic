@@ -228,7 +228,8 @@ class TableDiagnostic {
 
     $this->printSQL("
       INSERT INTO `${tableName}` (${columns})
-      SELECT $columns FROM `${tableName}`;
+      SELECT $columns FROM `${tableName}`
+      WHERE `${primaryKey}` = 0 OR `${primaryKey}` IS NULL;
     ");
 
     $this->printSQL("
