@@ -158,7 +158,7 @@ class Table {
    */
   public function getForeignKeys() {
     if ($this->trustedForeignKey) {
-      return (bool) $this->trustedForeignKey;
+      return $this->trustedForeignKey;
     }
 
     $sql = "SELECT
@@ -184,7 +184,7 @@ class Table {
       $this->trustedForeignKey[$foreignKey['column_name']] = $foreignKey;
     }
 
-    return (bool) $result;
+    return $this->trustedForeignKey;
 
   }
 
