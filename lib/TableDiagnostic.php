@@ -105,7 +105,7 @@ class TableDiagnostic {
     $this->diagnostic['missing foreign key'] = [];
 
     foreach ($this->table->guessForeignKeys() as $foreignKey) {
-      $this->printComment("Column ${col} is likely to be a foreign key");
+      $this->printComment("Column ${foreignKey} is likely to be a foreign key");
       $this->diagnostic['missing foreign key'][] = $foreignKey;
     }
   }
