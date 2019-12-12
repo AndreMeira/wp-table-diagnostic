@@ -137,6 +137,9 @@ class TableDiagnostic {
     }
   }
 
+  /**
+   *
+   */
   protected function printSQLRepair() {
     if (!$this->diagnostic['auto increment']) {
       $this->printAutoIncrementSQL();
@@ -155,10 +158,18 @@ class TableDiagnostic {
     }
   }
 
+  /**
+   *
+   */
   protected function printAutoIncrementSQL() {
     $tableName  = $this->table->getName();
     $primaryKey = $this->table->getBestPrimaryKeyGuess();
-    $colDef     = $this->table->getColumnDefinition($primaryKey);
+
+    if (!$primaryKey) {
+      return;
+    }
+
+    $colDef = $this->table->getColumnDefinition($primaryKey);
     $autoIncrement = (int) $this->table->getMaxPrimaryKeyValue();
 
     $this->printSQL("
@@ -170,6 +181,9 @@ class TableDiagnostic {
     ");
   }
 
+  /**
+   *
+   */
   protected function printForeignKeysSQLTemplate($foreignKeys) {
     $tableName  = $this->table->getName();
     $primaryKey = $this->table->getBestPrimaryKeyGuess();
@@ -186,6 +200,9 @@ class TableDiagnostic {
     }
   }
 
+  /**
+   *
+   */
   protected function printPrimaryKeySQL() {
     $tableName  = $this->table->getName();
     $primaryKey = $this->table->getBestPrimaryKeyGuess();
@@ -197,6 +214,9 @@ class TableDiagnostic {
     ");
   }
 
+  /**
+   *
+   */
   protected function printFixCorruptedPrimaryKeySQL() {
     $tableName  = $this->table->getName();
     $primaryKey = $this->table->getBestPrimaryKeyGuess();
