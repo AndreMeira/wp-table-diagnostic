@@ -194,7 +194,7 @@ class Table {
   public function listColumns($reload = false) {
     if (!$this->columns || FALSE != $reload) {
       $table = $this->options['table'];
-      $result = $this->pdo->query("describe ${table}")->fetchAll();
+      $result = $this->pdo->query("desc ${table}")->fetchAll();
 
       foreach ($result as $columns) {
         $this->columns[$columns['Field']] = $this->columns;
