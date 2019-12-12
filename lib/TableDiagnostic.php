@@ -107,8 +107,9 @@ class TableDiagnostic {
     foreach ($this->table->findZeroValuePrimaryKey() as $col => $lines) {
       $count = count($lines);
       $this->printComment("Column ${col} has ${count} corrupted valued lines");
-      $this->diagnostic['corrupted primary key lines'] = count($lines);
+      return $this->diagnostic['corrupted primary key lines'] = count($lines);
     }
+    $this->diagnostic['corrupted primary key lines'] = 0;
   }
 
   /**

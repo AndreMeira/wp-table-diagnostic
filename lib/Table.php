@@ -121,6 +121,7 @@ class Table {
    *
    */
   public function getColumnDefinition($col) {
+    $col = strtolower($col);
     $columns = $this->listColumns();
     return $columns[$col]['Type'];
   }
@@ -213,7 +214,8 @@ class Table {
       $result = $this->pdo->query("desc ${table}")->fetchAll();
 
       foreach ($result as $column) {
-        $this->columns[$column['Field']] = $column;
+        $key = strtolower($column['Field']);
+        $this->columns[$key] = $column;
       }
     }
     return $this->columns;
