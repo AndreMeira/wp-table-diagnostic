@@ -26,6 +26,7 @@ class TableDiagnostic {
     $tableName = $this->table->getName();
     $this->printComment("Diagnostic table: ${tableName}");
     $this->diagnosticPrimaryKey();
+    $this->diagnosticAutoIncrement();
     $this->diagnosticZeroValuePrimaryKey();
     $this->diagnosticMissingForeignKeys();
     $this->diagnosticZeroValueForeignKeys();
