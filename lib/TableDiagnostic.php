@@ -57,6 +57,7 @@ class TableDiagnostic {
       $this->printComment(
         "*No guess for primary key*"
       );
+      return $this->diagnostic['primary key'] = false;
     }
 
     $this->printComment(
