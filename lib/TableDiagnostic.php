@@ -89,7 +89,7 @@ class TableDiagnostic {
     if ($column = $this->table->getAutoIncrementColumn()) {
       $this->printComment(
         "Auto increment column:" .
-        $this->table->getAutoIncrementValue()
+        $this->table->getAutoIncrementColumn()
       );
       return $this->diagnostic['auto increment'] = true;
     }
