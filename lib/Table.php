@@ -123,7 +123,7 @@ class Table {
   public function getColumnDefinition($col) {
     $col = strtolower($col);
     $columns = $this->listColumns();
-    return $columns[$col]['Type'];
+    return @$columns[$col]['Type'];
   }
 
   /**
