@@ -166,7 +166,7 @@ class TableDiagnostic {
     $tableName  = $this->table->getName();
     $primaryKey = $this->table->getBestPrimaryKeyGuess();
 
-    if (!trim($primaryKey)) {
+    if (trim($primaryKey) = '') {
       return;
     }
 
@@ -249,13 +249,14 @@ class TableDiagnostic {
    *
    */
   protected function printSQL($str) {
-    echo str_replace(PHP_EOL, ' ', $str).PHP_EOL;
+    echo str_replace(PHP_EOL, ' ', trim($str)).PHP_EOL;
   }
 
   /**
    *
    */
   protected function printSQLTemplate($str) {
-    echo str_replace(PHP_EOL, ' ', '-- '.$str).PHP_EOL;
+    $this->printComment('>>> TEMPLATE to be filled')
+    echo str_replace(PHP_EOL, ' ', '-- '.trim($str)).PHP_EOL;
   }
 }
