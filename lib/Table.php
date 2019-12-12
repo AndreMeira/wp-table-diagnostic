@@ -207,9 +207,12 @@ class Table {
    *
    */
   public function findZeroValuePrimaryKey() {
-    $key = $this->getBestPrimaryKeyGuess();
-    $result[$key] = $this->findZeroValueForColumn($key);
-    return $result;
+    if ($key = $this->getBestPrimaryKeyGuess()) {
+      $key = $this->getBestPrimaryKeyGuess();
+      $result[$key] = $this->findZeroValueForColumn($key);
+      return $result;
+    }
+    return [];
   }
 
   /**

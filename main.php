@@ -27,7 +27,7 @@ foreach ($tableFinder->listAll() as $tableName) {
   $table = new Table($pdo, [
       "schema" => $database,
       "table"  => $tableName[0],
-      "prefix" => "wp_"
+      "prefix" => $conf['table_prefix']
   ]);
 
   $diagnostic = new TableDiagnostic($table);
