@@ -256,7 +256,7 @@ class TableDiagnostic {
    *
    */
   protected function printSQLTemplate($str) {
-    $this->printComment('>>> TEMPLATE to be filled')
+    $this->printComment('>>> TEMPLATE to be filled');
     echo str_replace(PHP_EOL, ' ', '-- '.trim($str)).PHP_EOL;
   }
 }
