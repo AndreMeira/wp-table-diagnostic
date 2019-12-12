@@ -179,7 +179,7 @@ class Table {
    *
    */
   public function listColumns($reload = false) {
-    if (!$this->columns || $reload) {
+    if (!$this->columns || false != $reload) {
       $table = $this->options['table'];
       $result = $this->pdo->query("describe ${table}");
 
@@ -228,7 +228,7 @@ class Table {
    */
   public function guessPrimaryKey() {
 
-    if ($this->hasPrimaryKey() || $this->primaryKey) {
+    if ($this->hasPrimaryKey() || ((bool) $this->primaryKey)) {
       return $this->primaryKey;
     }
 
@@ -285,8 +285,8 @@ class Table {
     $column = strtolower($column);
 
     if ($column === 'id'
-    || $column === $table.'_id'
-    || $column === 'meta_id' && strpos('meta', $table) > 0) {
+    || ($column === $table.'_id')
+    || ($column === 'meta_id') && strpos('meta', $table) > 0) {
       return $this->primaryKey[] = $column;
     }
 

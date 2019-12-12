@@ -170,7 +170,7 @@ class TableDiagnostic {
     }
   }
 
-  protected function printAutoIncrementSQL() {
+  protected function printPrimaryKeySQL() {
     $tableName  = $this->table->getName();
     $primaryKey = $this->table->getBestPrimaryKeyGuess();
     $colDef     = $this->table->getColumnDefinition($primaryKey);
