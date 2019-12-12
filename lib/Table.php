@@ -104,6 +104,21 @@ class Table {
   /**
    *
    */
+  public function getMaxPrimaryKeyValue() {
+    if ($key  = $this->getBestPrimaryKeyGuess()) {
+      $table  = $this->options['table'];
+      $sql    = "SELECT max(`${key}`) as num FROM  ${table}";
+      $result = $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+      return $result ? $result['num'] : 1;
+    }
+    
+    return 1;
+  }
+
+
+  /**
+   *
+   */
   public function getColumnDefinition($col) {
     $columns = $this->listColumns();
     return $columns[$col]['Type'];

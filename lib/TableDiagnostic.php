@@ -75,12 +75,19 @@ class TableDiagnostic {
     if ($this->table->hasAutoIncrement()) {
       $this->printComment(
         "Auto increment found:" .
-        $this->table->getAutoIncrementColumn()
+        $this->table->getAutoIncrementValue()
+      );
+    }
+
+    if ($column = $this->table->getAutoIncrementColumn()) {
+      $this->printComment(
+        "Auto increment column:" .
+        $this->table->getAutoIncrementValue()
       );
       return $this->diagnostic['auto increment'] = true;
     }
 
-    $this->printComment("No auto increment");
+    $this->printComment("No auto increment column");
     $this->diagnostic['auto increment'] = false;
   }
 
@@ -145,7 +152,7 @@ class TableDiagnostic {
     $tableName  = $this->table->getName();
     $primaryKey = $this->table->getBestPrimaryKeyGuess();
     $colDef     = $this->table->getColumnDefinition($primaryKey);
-    $autoIncrement = (int) $this->table->getAutoIncrementValue();
+    $autoIncrement = (int) $this->table->getMaxPrimaryKeyValue();
 
     $this->printSQL("
       ALTER TABLE `${tableName}` MODIFY `${primaryKey}` $colDef  NOT NULL AUTO_INCREMENT;
