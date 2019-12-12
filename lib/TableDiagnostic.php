@@ -137,7 +137,7 @@ class TableDiagnostic {
     }
 
     if ($foreignKeys = $this->diagnostic['missing foreign key']) {
-      $this->printForeignKeysSQLTemplate();
+      $this->printForeignKeysSQLTemplate($foreignKeys);
     }
   }
 
