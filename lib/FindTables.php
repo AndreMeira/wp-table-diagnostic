@@ -31,7 +31,7 @@ class FindTables {
   public function __construct(PDO $pdo, $options = []) {
     $this->pdo = $pdo;
     $this->options = $options;
-    $this>verifyOptions();
+    $this->verifyOptions();
   }
 
   /**
