@@ -238,7 +238,8 @@ class Table {
    *
    */
   public function guessPrimaryKey() {
-    if ($this->hasPrimaryKey() || ((bool) $this->primaryKey)) {
+    if ($this->hasPrimaryKey()
+    || ((bool) $this->primaryKey)) {
       return $this->primaryKey;
     }
 
