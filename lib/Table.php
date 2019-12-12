@@ -59,11 +59,24 @@ class Table {
     $this->verifyOptions();
   }
 
+  /**
+   *
+   */
+  public function getName() {
+    return $this->options['table'];
+  }
+
+  /**
+   *
+   */
   public function hasAutoIncrement() {
     $this->getAutoIncrementValue();
     return $this->autoIncrement !== null;
   }
 
+  /**
+   *
+   */
   public function getAutoIncrementValue() {
     if ($this->autoIncrement !== null) {
       return $this->autoIncrement;
