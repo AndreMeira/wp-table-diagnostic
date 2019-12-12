@@ -42,7 +42,7 @@ class TableDiagnostic {
     if ($this->table->hasPrimaryKey()) {
       $this->printComment(
         "Primary key OK: " .
-        $this->table->getPrimaryKey()
+        $this->table->getBestPrimaryKeyGuess()
       );
 
       return $this->diagnostic['primary key'] = true;
