@@ -238,8 +238,9 @@ class Table {
    *
    */
   public function guessPrimaryKey() {
-    if ($this->hasPrimaryKey()
-    || ((bool) $this->primaryKey)) {
+    $hasPK = $this->hasPrimaryKey();
+    $countPK = count($this->primaryKey);
+    if ($hasPK || $countPK) {
       return $this->primaryKey;
     }
 
@@ -296,10 +297,17 @@ class Table {
    */
   protected function pushToResultIfIsLikelyPrimaryKey($column, $table) {
     $column = strtolower($column);
+    $column === $table.'_id';
+    
+    if ($column === 'id') {
+      return $this->primaryKey[] = $column;
+    }
 
-    if ($column === 'id'
-    || ($column === $table.'_id')
-    || ($column === 'meta_id') && strpos('meta', $table) > 0) {
+    if ($column === $table.'_id') {
+      return $this->primaryKey[] = $column;
+    }
+
+    if ($column === 'meta_id' && strpos('meta', $table) > 0) {
       return $this->primaryKey[] = $column;
     }
 

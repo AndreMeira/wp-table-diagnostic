@@ -26,7 +26,8 @@ $tableFinder = new FindTables($pdo, [
 foreach ($tableFinder->listAll() as $tableName) {
   $table = new Table($pdo, [
       "schema" => $database,
-      "table" => $tableName[0]
+      "table"  => $tableName[0],
+      "prefix" => "wp_"
   ]);
 
   $diagnostic = new TableDiagnostic($table);
