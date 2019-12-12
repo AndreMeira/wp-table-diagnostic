@@ -53,6 +53,12 @@ class TableDiagnostic {
       "Primary key not found"
     );
 
+    if (!$this->table->guessPrimaryKey()) {
+      $this->printComment(
+        "*No guess for primary key*"
+      );
+    }
+
     $this->printComment(
       "Primary key most likely to be: " .
       $this->table->getBestPrimaryKeyGuess()
