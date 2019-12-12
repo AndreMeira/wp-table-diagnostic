@@ -102,6 +102,7 @@ class TableDiagnostic {
    */
   protected function diagnosticMissingForeignKeys() {
     $this->printComment("Looking for missing foreign keys");
+    $this->diagnostic['missing foreign key'] = [];
 
     foreach ($this->table->guessForeignKeys() as $foreignKey) {
       $this->printComment("Column ${col} is likely to be a foreign key");
