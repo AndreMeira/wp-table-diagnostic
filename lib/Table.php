@@ -194,7 +194,7 @@ class Table {
   public function listColumns($reload = false) {
     if (!$this->columns || false != $reload) {
       $table = $this->options['table'];
-      $result = $this->pdo->query("describe ${table}");
+      $result = $this->pdo->query("describe ${table}")->fetchAll();
 
       foreach ($result as $columns) {
         $this->columns[$columns['Field']] = $this->columns;
@@ -284,7 +284,7 @@ class Table {
       select * from ${table}
       where `${column}` = 0
       or `${column}` is null
-    ");
+    ")->fetchAll();
 
     return $this->brokenLines[$column] = $result;
   }
