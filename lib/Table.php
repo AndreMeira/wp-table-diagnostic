@@ -297,7 +297,6 @@ class Table {
    */
   protected function pushToResultIfIsLikelyPrimaryKey($column, $table) {
     $column = strtolower($column);
-    $column === $table.'_id';
 
     if ($column === 'id') {
       return $this->primaryKey[] = $column;
@@ -307,7 +306,7 @@ class Table {
       return $this->primaryKey[] = $column;
     }
 
-    if ($column === ltrim($table, 's').'_id') {
+    if ($column === rtrim($table, 's').'_id') {
       return $this->primaryKey[] = $column;
     }
 
