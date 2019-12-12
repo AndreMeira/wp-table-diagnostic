@@ -163,8 +163,8 @@ class TableDiagnostic {
     $autoIncrement = (int) $this->table->getAutoIncrementValue();
 
     foreach ($foreignKeys as $key) {
-      $this->printSQL("
-        ALTER TABLE `${tableName} `
+      $this->printSQLTemplate("
+        ALTER TABLE `${tableName}`
         ADD CONSTRAINT `fk_${tableName}_${key}`
         FOREIGN KEY (`${key}`)
         REFERENCES `...` (`...id`);
