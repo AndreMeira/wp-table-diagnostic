@@ -192,7 +192,7 @@ class Table {
    *
    */
   public function listColumns($reload = false) {
-    if (!$this->columns || false != $reload) {
+    if (!$this->columns || FALSE != $reload) {
       $table = $this->options['table'];
       $result = $this->pdo->query("describe ${table}")->fetchAll();
 
