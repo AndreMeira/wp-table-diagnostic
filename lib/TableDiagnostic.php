@@ -166,7 +166,7 @@ class TableDiagnostic {
     $tableName  = $this->table->getName();
     $primaryKey = $this->table->getBestPrimaryKeyGuess();
 
-    if (trim($primaryKey) = '') {
+    if (trim($primaryKey) == '') {
       return;
     }
 
