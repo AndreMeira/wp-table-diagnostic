@@ -116,7 +116,7 @@ class Table {
     $this->listColumns();
 
     foreach ($this->columns as $column) {
-      if (strpos('auto_increment', $column['Extra']) !== false) {
+      if (strpos((string) $column['Extra'], 'auto_increment') !== false) {
         return $column['Field'];
       }
     }
@@ -310,7 +310,7 @@ class Table {
       return $this->primaryKey[] = $column;
     }
 
-    if ($column === 'meta_id' && strpos('meta', $table) > 0) {
+    if ($column === 'meta_id' && strpos($table, 'meta') > 0) {
       return $this->primaryKey[] = $column;
     }
 
@@ -319,13 +319,13 @@ class Table {
       return;
     }
 
-    if (strpos("_id", $column) === false) {
+    if (strpos($column, "_id") === false) {
       return;
     }
 
     $prefix = preg_replace('~_id$~', '', $column);
 
-    if (strpos($prefix, $table) === 0) {
+    if (strpos($table, $prefix) === 0) {
       return $this->primaryKey[] = $column;
     }
   }
