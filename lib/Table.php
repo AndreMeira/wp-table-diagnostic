@@ -197,7 +197,7 @@ class Table {
       $result = $this->pdo->query("desc ${table}")->fetchAll();
 
       foreach ($result as $column) {
-        $this->columns[$column['Field']] = $this->$column;
+        $this->columns[$column['Field']] = $column;
       }
     }
     return $this->columns;
