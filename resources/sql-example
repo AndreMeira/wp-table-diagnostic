@@ -34,7 +34,8 @@ SHOW KEYS FROM wp_postmeta WHERE Key_name = 'PRIMARY';
 SELECT `auto_increment`
 FROM  INFORMATION_SCHEMA.TABLES
 WHERE TABLE_SCHEMA = 'mydb'
-AND   TABLE_NAME   = 'wp_postmeta';
+AND   TABLE_NAME   = 'wp_yoast_seo_meta'
+AND auto_increment is not null;
 
 ALTER TABLE wp_postmeta MODIFY meta_id INTEGER(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE wp_postmeta AUTO_INCREMENT = 97707;

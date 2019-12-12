@@ -85,7 +85,8 @@ class Table {
     $sql = "SELECT `auto_increment`
       FROM  INFORMATION_SCHEMA.TABLES
       WHERE TABLE_SCHEMA = :schema
-      AND   TABLE_NAME   = :table";
+      AND   TABLE_NAME   = :table"
+      AND auto_increment is not null;
 
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute([
@@ -111,7 +112,7 @@ class Table {
       $result = $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
       return $result ? $result['num'] : 1;
     }
-    
+
     return 1;
   }
 
