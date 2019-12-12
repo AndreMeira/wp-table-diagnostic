@@ -249,6 +249,7 @@ class TableDiagnostic {
    *
    */
   protected function printSQL($str) {
+    $str = preg_replace('~\s+~', ' ', $str);
     echo str_replace(PHP_EOL, ' ', trim($str)).PHP_EOL;
   }
 
@@ -256,7 +257,8 @@ class TableDiagnostic {
    *
    */
   protected function printSQLTemplate($str) {
+    $this->printComment('*******');
     $this->printComment('>>> TEMPLATE to be filled');
-    echo str_replace(PHP_EOL, ' ', '-- '.trim($str)).PHP_EOL;
+    $this->printSQL(PHP_EOL, ' ', '-- '.trim($str)).PHP_EOL;
   }
 }
