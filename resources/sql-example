@@ -1,0 +1,83 @@
+SELECT SQL_CALC_FOUND_ROWS wp_posts.*,
+(
+SELECT COUNT(*)
+FROM wp_prli_clicks AS cl
+WHERE cl.link_id = li.id
+AND cl.ip NOT LIKE '88.164.15.242' AND ( cl.robot=0 )
+) as clicks
+FROM wp_posts JOIN wp_prli_links AS li ON wp_posts.ID = li.link_cpt_id WHERE 1=1 AND wp_posts.post_type = 'pretty-link' AND (wp_posts.post_status = 'publish' OR wp_posts.post_status = 'future' OR wp_posts.post_status = 'draft' OR wp_posts.post_status = 'pending' OR wp_posts.post_status = 'private') ORDER BY wp_posts.post_date DESC LIMIT 0, 20;
+
+
+SELECT `AUTO_INCREMENT`
+FROM  INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA = 'mydb'
+AND   TABLE_NAME   = 'wp_prli_links';
+
+SELECT DISTINCT
+    TABLE_NAME,
+    INDEX_NAME
+FROM INFORMATION_SCHEMA.STATISTICS
+WHERE TABLE_SCHEMA = 'mydb'
+AND   TABLE_NAME   = 'wp_prli_links';
+
+SHOW KEYS FROM wp_prli_links WHERE Key_name = 'PRIMARY';
+
+ALTER TABLE wp_prli_links MODIFY id INTEGER(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE wp_prli_links AUTO_INCREMENT = 1978;
+ALTER TABLE wp_prli_links ADD PRIMARY KEY(id);
+
+____
+
+Image
+SHOW KEYS FROM wp_postmeta WHERE Key_name = 'PRIMARY';
+
+SELECT `auto_increment`
+FROM  INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA = 'mydb'
+AND   TABLE_NAME   = 'wp_postmeta';
+
+ALTER TABLE wp_postmeta MODIFY meta_id INTEGER(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE wp_postmeta AUTO_INCREMENT = 97707;
+ALTER TABLE wp_postmeta ADD PRIMARY KEY(meta_id);
+
+
+____
+
+SELECT `auto_increment`
+FROM  INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA = 'mydb';
+
+
+SELECT k.column_name
+FROM information_schema.table_constraints t
+JOIN information_schema.key_column_usage k
+USING(constraint_name,table_schema,table_name)
+WHERE t.constraint_type='PRIMARY KEY'
+  AND t.table_schema='mydb'
+  AND t.table_name='wp_essb3_click_stats';
+
+
+
+  SELECT k.table_name, k.column_name
+  FROM information_schema.table_constraints t
+  JOIN information_schema.key_column_usage k
+  USING(constraint_name,table_schema,table_name)
+  WHERE t.constraint_type='PRIMARY KEY'
+    AND t.table_schema='mydb';
+
+SELECT *
+FROM  INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA = 'mydb'
+AND   TABLE_NAME   = 'wp_prli_links';
+
+SELECT
+    TABLE_NAME,
+    COLUMN_NAME,
+    CONSTRAINT_NAME,
+    REFERENCED_TABLE_NAME,
+    REFERENCED_COLUMN_NAME
+FROM
+    INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE
+	REFERENCED_TABLE_SCHEMA = 'mydb'
+  AND REFERENCED_TABLE_NAME = 'wp_prli_links';
