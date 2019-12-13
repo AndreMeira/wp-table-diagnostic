@@ -198,6 +198,12 @@ class TableDiagnostic {
         FOREIGN KEY (`${key}`)
         REFERENCES `...` (`...id`);
       ");
+
+      $this->printSQL("
+        CREATE INDEX index_${tableName}_${key}`
+        ON `${tableName}` (`${key}`)
+      ");
+
     }
   }
 
@@ -258,8 +264,7 @@ class TableDiagnostic {
    *
    */
   protected function printSQLTemplate($str) {
-    $this->printComment('*******');
     $this->printComment('>>> TEMPLATE to be filled');
-    $this->printSQL(trim($str));
+    $this->printSQL('-- '.trim($str));
   }
 }
