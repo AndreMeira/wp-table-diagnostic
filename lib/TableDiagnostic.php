@@ -190,12 +190,12 @@ class TableDiagnostic {
 
       $this->printSQL("
         INSERT INTO `${tableName}` (${columns})
-        SELECT $columns FROM `${table}_tmp`
+        SELECT $columns FROM `${$tableName}_tmp`
         WHERE `${primaryKey}` = 0 OR `${primaryKey}` IS NULL;
       ");
 
       $this->printSQL("
-        DROP TEMPORARY TABLE `${table}_tmp`
+        DROP TEMPORARY TABLE `${$tableName}_tmp`
       ");
     }
   }
