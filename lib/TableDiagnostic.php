@@ -233,7 +233,7 @@ class TableDiagnostic {
     $columns    = implode(', ', $columns);
 
     $this->printSQL("
-      INSERT INTO `${tableName}` (${columns})
+      CREATE TEMPORARY TABLE `${table}_tmp`
       SELECT $columns FROM `${tableName}`
       WHERE `${primaryKey}` = 0 OR `${primaryKey}` IS NULL;
     ");
@@ -243,6 +243,17 @@ class TableDiagnostic {
       WHERE `${primaryKey}` = 0
       OR `${primaryKey}` IS NULL;
     ");
+
+    $this->printSQL("
+      INSERT INTO `${tableName}` (${columns})
+      SELECT $columns FROM `${table}_tmp`
+      WHERE `${primaryKey}` = 0 OR `${primaryKey}` IS NULL;
+    ");
+
+    $this->printSQL("
+      DROP TEMPORARY TABLE `${table}_tmp`
+    ");
+
   }
 
   /**
