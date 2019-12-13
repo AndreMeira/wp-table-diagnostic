@@ -145,7 +145,7 @@ class TableDiagnostic {
     if ($this->diagnostic['corrupted primary key lines']) {
       $this->printFixCorruptedPrimaryKeySQL();
     }
-    
+
     if (!$this->diagnostic['primary key']) {
       $this->printPrimaryKeySQL();
     }
@@ -182,6 +182,12 @@ class TableDiagnostic {
     ");
 
     if ($this->diagnostic['corrupted primary key lines']) {
+      $tableName  = $this->table->getName();
+      $columns    = $this->table->listColumns();
+      $columns    = array_keys($columns);
+      $columns    = array_diff($columns, [$primaryKey]);
+      $columns    = implode(', ', $columns);
+
       $this->printSQL("
         INSERT INTO `${tableName}` (${columns})
         SELECT $columns FROM `${table}_tmp`
@@ -245,7 +251,7 @@ class TableDiagnostic {
     $columns    = implode(', ', $columns);
 
     $this->printSQL("
-      CREATE TEMPORARY TABLE `${table}_tmp`
+      CREATE TEMPORARY TABLE `${$tableName}_tmp`
       SELECT $columns FROM `${tableName}`
       WHERE `${primaryKey}` = 0 OR `${primaryKey}` IS NULL;
     ");
