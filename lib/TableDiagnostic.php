@@ -172,13 +172,14 @@ class TableDiagnostic {
 
     $colDef = $this->table->getColumnDefinition($primaryKey);
     $autoIncrement = (int) $this->table->getMaxPrimaryKeyValue();
+    $autoIncrement = max($autoIncrement, 1);
 
     $this->printSQL("
       ALTER TABLE `${tableName}` MODIFY `${primaryKey}` $colDef  NOT NULL AUTO_INCREMENT;
     ");
 
     $this->printSQL("
-      ALTER TABLE wp_postmeta AUTO_INCREMENT = ${autoIncrement};
+      ALTER TABLE `${tableName}` AUTO_INCREMENT = ${autoIncrement};
     ");
 
     if ($this->diagnostic['corrupted primary key lines']) {
