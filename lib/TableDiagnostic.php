@@ -195,7 +195,7 @@ class TableDiagnostic {
       ");
 
       $this->printSQL("
-        DROP TEMPORARY TABLE `${tableName}_tmp`
+        DROP TEMPORARY TABLE `${tableName}_tmp`;
       ");
     }
   }
