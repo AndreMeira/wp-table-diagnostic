@@ -200,7 +200,7 @@ class TableDiagnostic {
       ");
 
       $this->printSQL("
-        CREATE INDEX index_${tableName}_${key}`
+        CREATE INDEX `index_${tableName}_${key}`
         ON `${tableName}` (`${key}`);
       ");
 
