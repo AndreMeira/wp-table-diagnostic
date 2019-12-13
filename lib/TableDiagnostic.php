@@ -251,7 +251,7 @@ class TableDiagnostic {
     $columns    = implode(', ', $columns);
 
     $this->printSQL("
-      CREATE TEMPORARY TABLE `${$tableName}_tmp`
+      CREATE TEMPORARY TABLE `${tableName}_tmp`
       SELECT $columns FROM `${tableName}`
       WHERE `${primaryKey}` = 0 OR `${primaryKey}` IS NULL;
     ");
