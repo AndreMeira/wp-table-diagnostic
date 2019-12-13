@@ -142,16 +142,16 @@ class TableDiagnostic {
    *
    */
   protected function printSQLRepair() {
-    if (!$this->diagnostic['auto increment']) {
-      $this->printAutoIncrementSQL();
-    }
-
     if ($this->diagnostic['corrupted primary key lines']) {
       $this->printFixCorruptedPrimaryKeySQL();
     }
-
+    
     if (!$this->diagnostic['primary key']) {
       $this->printPrimaryKeySQL();
+    }
+
+    if (!$this->diagnostic['auto increment']) {
+      $this->printAutoIncrementSQL();
     }
 
     if ($foreignKeys = $this->diagnostic['missing foreign key']) {
@@ -180,6 +180,18 @@ class TableDiagnostic {
     $this->printSQL("
       ALTER TABLE wp_postmeta AUTO_INCREMENT = ${autoIncrement};
     ");
+
+    if ($this->diagnostic['corrupted primary key lines']) {
+      $this->printSQL("
+        INSERT INTO `${tableName}` (${columns})
+        SELECT $columns FROM `${table}_tmp`
+        WHERE `${primaryKey}` = 0 OR `${primaryKey}` IS NULL;
+      ");
+
+      $this->printSQL("
+        DROP TEMPORARY TABLE `${table}_tmp`
+      ");
+    }
   }
 
   /**
@@ -242,16 +254,6 @@ class TableDiagnostic {
       DELETE FROM `${tableName}`
       WHERE `${primaryKey}` = 0
       OR `${primaryKey}` IS NULL;
-    ");
-
-    $this->printSQL("
-      INSERT INTO `${tableName}` (${columns})
-      SELECT $columns FROM `${table}_tmp`
-      WHERE `${primaryKey}` = 0 OR `${primaryKey}` IS NULL;
-    ");
-
-    $this->printSQL("
-      DROP TEMPORARY TABLE `${table}_tmp`
     ");
 
   }
